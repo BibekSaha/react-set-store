@@ -7,22 +7,73 @@
 ## Install
 
 ```bash
-npm install --save react-set-store
+npm install react-set-store
 ```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react';
+import Store, { useStore } from 'react-set-store';
 
-import MyComponent from 'react-set-store'
-import 'react-set-store/dist/index.css'
+/*
+ * Initial state has to be an object
+ * Initial state cannot have `setStore` as key
+ */
+const INITIAL_STATE = {
+  count: 0
+};
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+// Button.js
+const Button = ({ text, onClick }) => (
+  <button onClick={onClick}>{text}</button>
+);
+
+// PlusButton.js
+const PlusButton = () => {
+  /*
+   * setStore works exactly like `setState` in  class based components
+   */
+  const [store, setStore] = useStore();
+
+  return (
+    <Button
+      text='+'
+      onClick={() => setStore({ count: store.count + 1 })}
+    />
+  );
+};
+
+// MinusButton.js
+const MinusButton = () => {
+  const [store, setStore] = useStore();
+  return (
+    <Button
+      text='-'
+      onClick={() => setStore({ count: store.count - 1 })}
+    />
+  );
+};
+
+// App.js
+const App = () => {
+  const [store] = useStore();
+  return (
+    <div>
+      <h1>{store.count}</h1>
+      <PlusButton />
+      <MinusButton />
+    </div>
+  )
+};
+
+// index.js
+ReactDOM.render(
+  <Store state={INITIAL_STATE}>
+    <App />
+  </Store>,
+  document.getElementById('root')
+);
 ```
 
 ## License
