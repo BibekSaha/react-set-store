@@ -14,6 +14,8 @@ npm install react-set-store
 
 ```jsx
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import Store, { useStore } from 'react-set-store';
 
 /*
@@ -31,11 +33,10 @@ const Button = ({ text, onClick }) => (
 
 // PlusButton.js
 const PlusButton = () => {
-  /*
-   * setStore works exactly like `setState` in  class based components
-   */
+  // ==================================================================
+  // setStore works exactly like `setState` in  class based components
+  // ==================================================================
   const [store, setStore] = useStore();
-
   return (
     <Button
       text='+'
