@@ -18,10 +18,10 @@ import ReactDOM from 'react-dom';
 
 import Store, { useStore } from 'react-set-store';
 
-/*
+/************************************************
  * Initial state has to be an object
  * Initial state cannot have `setStore` as key
- */
+ ************************************************/
 const INITIAL_STATE = {
   count: 0
 };
