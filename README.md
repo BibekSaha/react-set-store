@@ -1,6 +1,6 @@
 # react-set-store
 
-> Simple global state in React
+> Simple global state for React
 
 [![NPM](https://img.shields.io/npm/v/react-set-store.svg)](https://www.npmjs.com/package/react-set-store) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -16,12 +16,13 @@ npm install react-set-store
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Store, { useStore } from 'react-set-store';
+import Store, { useStore, withStore } from 'react-set-store';
 
 /************************************************
- * Initial state has to be an object
- * Initial state cannot have `setStore` as key
+ * State has to be an object
+ * State cannot have `setStore` as key
  ************************************************/
+
 const INITIAL_STATE = {
   count: 0
 };
@@ -46,15 +47,27 @@ const PlusButton = () => {
 };
 
 // MinusButton.js
-const MinusButton = () => {
-  const [store, setStore] = useStore();
-  return (
-    <Button
-      text='-'
-      onClick={() => setStore({ count: store.count - 1 })}
-    />
-  );
-};
+class MinusButton extends React.Component {
+  setStore = this.props.SET_STORE;
+
+  handleClick = () => {
+    const store = this.props.STORE;
+    this.setStore({
+      count: store.count - 1,
+    });
+  };
+
+  render() {
+    return (
+      <Button
+        text='-'
+        onClick={this.handleClick}
+      />
+    );
+  }
+}
+
+export default withStore(MinusButton);
 
 // App.js
 const App = () => {
