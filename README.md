@@ -10,6 +10,9 @@
 npm install react-set-store
 ```
 
+## CodeSandbox
+[https://codesandbox.io/s/global-state-in-react-react-set-store-6bexj](https://codesandbox.io/s/global-state-in-react-react-set-store-6bexj)
+
 ## Usage
 
 ```jsx
@@ -19,8 +22,8 @@ import ReactDOM from 'react-dom';
 import Store, { useStore, withStore } from 'react-set-store';
 
 /************************************************
- * State has to be an object
- * State cannot have `setStore` as key
+ *  State has to be an object                   *
+ *  State cannot have `setStore` as key         *
  ************************************************/
 
 const INITIAL_STATE = {
@@ -29,7 +32,9 @@ const INITIAL_STATE = {
 
 // Button.js
 const Button = ({ text, onClick }) => (
-  <button onClick={onClick}>{text}</button>
+  <button onClick={onClick}>
+    {text}
+  </button>
 );
 
 // PlusButton.js
@@ -40,7 +45,7 @@ const PlusButton = () => {
   const [store, setStore] = useStore();
   return (
     <Button
-      text='+'
+      text="+"
       onClick={() => setStore({ count: store.count + 1 })}
     />
   );
@@ -60,7 +65,7 @@ class MinusButton extends React.Component {
   render() {
     return (
       <Button
-        text='-'
+        text="-"
         onClick={this.handleClick}
       />
     );
